@@ -1,0 +1,31 @@
+name: Publish Docker image
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - '*'
+  workflow_dispatch:
+
+concurrency:
+  group: publish-${{ github.ref }}-harbor
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+  checks: write
+
+jobs:
+  publish:
+    uses: OmniTrustILM/.github/.github/workflows/containers-build-and-push.yml@main
+    secrets:
+      CONTAINER_REGISTRY_USERNAME: ${{ secrets.CONTAINER_REGISTRY_USERNAME }}
+      CONTAINER_REGISTRY_PASSWORD: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
+      COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+      COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+    with:
+      image: ilm/keycloak-optimized
+      cache-scope: keycloak-optimized
+      pre-build: none
