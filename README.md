@@ -8,6 +8,12 @@ This image targets Keycloak `26.8.1` using the official
 `quay.io/keycloak/keycloak:26.8.1-0` base image. The corresponding ILM image
 version is `26.8.1-0`.
 
+The image enables Keycloak's experimental `cimd` feature, so MCP clients can identify themselves with
+[Client ID Metadata Documents](https://www.keycloak.org/securing-apps/mcp-authz-server). Every realm then
+advertises this support in its metadata, but accepts such client IDs only when its client policies use the
+`client-id-metadata-document` executor. Clients that prefer it, such as Claude, try it instead of dynamic client
+registration, so a realm that relies on dynamic registration for these clients also needs that policy.
+
 ## Container image
 
 The image is published as `hub.omnitrustregistry.com/ilm/keycloak-optimized`.

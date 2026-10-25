@@ -13,6 +13,9 @@ ENV KC_CACHE_STACK=kubernetes
 ENV KC_DB=postgres
 ENV KC_HTTP_RELATIVE_PATH=/kc
 ENV KC_HEALTH_ENABLED=true
+# Experimental Client ID Metadata Documents for MCP clients. Every realm then advertises support, but accepts
+# metadata-document client IDs only when its client policies use the client-id-metadata-document executor.
+ENV KC_FEATURES=cimd
 
 WORKDIR /opt/keycloak
 
