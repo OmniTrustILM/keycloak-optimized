@@ -14,6 +14,12 @@ advertises this support in its metadata, but accepts such client IDs only when i
 `client-id-metadata-document` executor. Clients that prefer it, such as Claude, try it instead of dynamic client
 registration, so a realm that relies on dynamic registration for these clients also needs that policy.
 
+It also enables the preview features `token-exchange-delegation` and `parameterized-scopes` for RFC 8693
+delegation: a token exchange can then name the acting client in an `act` claim when the user's token allows that
+client through the built-in `delegation:client` scope. Existing realms are not changed. A realm created afterwards
+gets the `delegation:client` and `delegation:user` client scopes as default optional scopes, unless its import lists
+client scopes explicitly.
+
 ## Container image
 
 The image is published as `hub.omnitrustregistry.com/ilm/keycloak-optimized`.
