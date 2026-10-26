@@ -15,7 +15,9 @@ ENV KC_HTTP_RELATIVE_PATH=/kc
 ENV KC_HEALTH_ENABLED=true
 # Experimental Client ID Metadata Documents for MCP clients. Every realm then advertises support, but accepts
 # metadata-document client IDs only when its client policies use the client-id-metadata-document executor.
-ENV KC_FEATURES=cimd
+# Preview RFC 8693 delegation: an actor token yields an act claim when the user's token allows that actor through
+# the delegation:client scope, which parameterized-scopes provides.
+ENV KC_FEATURES=cimd,token-exchange-delegation,parameterized-scopes
 
 WORKDIR /opt/keycloak
 
